@@ -1,0 +1,13 @@
+[
+  {
+    "label": "test",
+    "command": "npm test --",
+    "use_new_terminal": false
+  },
+  {
+    "label": "test watch",
+    "command": "npm run test:watch",
+    "use_new_terminal": true
+  }
+]
+

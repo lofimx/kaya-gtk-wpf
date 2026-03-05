@@ -1,0 +1,6 @@
+data/ca.deobald.Kaya.desktop.in
+data/ca.deobald.Kaya.appdata.xml.in
+data/ca.deobald.Kaya.gschema.xml
+data/window.ui
+src/main.ts
+src/window.ts

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schemalist gettext-domain="kaya">
+  <schema id="ca.deobald.Kaya" path="/ca/deobald/Kaya/">
+    <key name="sync-server-url" type="s">
+      <default>'https://kaya.town'</default>
+      <summary>Kaya Server URL</summary>
+      <description>The URL of the Kaya Server to synchronize with. If set to the default (https://kaya.town), sync is disabled until a custom server is configured.</description>
+    </key>
+    <key name="sync-email" type="s">
+      <default>''</default>
+      <summary>Sync Account Email</summary>
+      <description>The email address for authenticating with the Kaya Server.</description>
+    </key>
+    <key name="sync-enabled" type="b">
+      <default>false</default>
+      <summary>Sync Enabled</summary>
+      <description>Whether synchronization with the Kaya Server is enabled.</description>
+    </key>
+    <key name="sync-last-error" type="s">
+      <default>''</default>
+      <summary>Last Sync Error</summary>
+      <description>The last error that occurred during synchronization, if any.</description>
+    </key>
+    <key name="sync-last-success" type="s">
+      <default>''</default>
+      <summary>Last Successful Sync</summary>
+      <description>Timestamp of the last successful synchronization.</description>
+    </key>
+  </schema>
+</schemalist>

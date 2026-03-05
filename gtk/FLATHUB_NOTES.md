@@ -1,0 +1,50 @@
+# Flathub Submission Checklist
+
+## 1. Validation
+
+All validation checks passed:
+
+```bash
+# Validate metainfo
+appstreamcli validate data/ca.deobald.Kaya.metainfo.xml.in
+
+# Validate desktop file
+desktop-file-validate data/ca.deobald.Kaya.desktop.in
+
+# Test Flathub build
+flatpak run --command=flathub-build org.flatpak.Builder --install ca.deobald.Kaya.json
+
+# Regular build
+make build
+make test
+```
+
+### Build Configuration
+
+The production manifest includes:
+- GNOME 48 runtime (stable, includes GTK 4.18)
+- Offline npm dependency bundling via generated-sources.json (888 packages)
+- npm configured for offline mode with cache at /run/build/kaya/flatpak-node/npm-cache
+- File system permission for ~/.kaya directory
+- All icons (scalable SVG, symbolic, PNGs in 6 sizes)
+- AppStream metadata with screenshots
+- Git source pointing to v0.1.0 tag
+
+## 2. Flathub Submission Process
+
+1. Go to https://github.com/flathub/flathub/new/new-pr
+2. Click "New App Submission" or create a new issue requesting app submission
+3. Follow the Flathub bot instructions to create your app repository
+4. Once `ca.deobald.Kaya` repository is created under flathub:
+   - Clone it: `git clone https://github.com/flathub/ca.deobald.Kaya.git`
+   - Copy your `ca.deobald.Kaya.json` into it
+   - Add flathub.json if required (bot will tell you)
+   - Commit and push
+   - Create PR for review
+
+## Resources
+
+- [Flathub App Submission Guide](https://github.com/flathub/flathub/wiki/App-Submission)
+- [Flathub MetaInfo Guidelines](https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines)
+- [Flatpak Available Runtimes](https://docs.flatpak.org/en/latest/available-runtimes.html)
+- [OARS Content Rating Generator](https://hughsie.github.io/oars/generate.html)

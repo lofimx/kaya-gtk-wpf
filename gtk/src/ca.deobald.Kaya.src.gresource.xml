@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gresources>
+  <gresource prefix="/ca/deobald/Kaya/js">
+    <file>main.js</file>
+    <file>main.js.map</file>
+    <file>models/anga.js</file>
+    <file>models/anga.js.map</file>
+    <file>models/clock.js</file>
+    <file>models/clock.js.map</file>
+    <file>models/dropped.js</file>
+    <file>models/dropped.js.map</file>
+    <file>models/filename.js</file>
+    <file>models/filename.js.map</file>
+    <file>models/meta.js</file>
+    <file>models/meta.js.map</file>
+    <file>models/timestamp.js</file>
+    <file>models/timestamp.js.map</file>
+    <file>services/file_service.js</file>
+    <file>services/file_service.js.map</file>
+    <file>services/settings_service.js</file>
+    <file>services/settings_service.js.map</file>
+    <file>services/sync_manager.js</file>
+    <file>services/sync_manager.js.map</file>
+    <file>services/sync_service.js</file>
+    <file>services/sync_service.js.map</file>
+    <file>views/preferences.js</file>
+    <file>views/preferences.js.map</file>
+    <file>views/window.js</file>
+    <file>views/window.js.map</file>
+    <file>vendor/temporal.js</file>
+  </gresource>
+</gresources>

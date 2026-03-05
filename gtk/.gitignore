@@ -1,0 +1,26 @@
+_build/
+.vscode/
+.flatpak/
+node_modules/
+.fenv/
+.flatpak-builder/
+.yarn/
+coverage/
+foo.png
+repo/
+*.flatpak
+eslint-report.txt
+
+# macOS build artifacts
+builddir-macos/
+*.app
+*.dmg
+*.iconset/
+*.icns
+
+# windows iso junk
+win10iso/Win10.iso
+win10iso/downloads
+win10iso/drivers
+win10iso/win_temp
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Steven Deobald -->
+<component type="desktop-application">
+  <id>ca.deobald.Kaya</id>
+  <name>Kaya</name>
+  <summary>Simple bookmark manager for GNOME</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0</project_license>
+
+  <developer id="ca.deobald">
+    <name>Steven Deobald</name>
+  </developer>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
+  <recommends>
+    <display_length compare="ge">768</display_length>
+  </recommends>
+
+  <launchable type="desktop-id">ca.deobald.Kaya.desktop</launchable>
+
+  <description>
+    <p>
+      Kaya is a lightweight bookmark manager designed for GNOME. It provides a simple
+      and efficient way to save and organize your bookmarks.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Quick bookmark entry with keyboard shortcuts</li>
+      <li>Clean and minimal GNOME-style interface</li>
+      <li>Local storage in your home directory</li>
+    </ul>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window for entering bookmarks</caption>
+      <image>https://gitlab.gnome.org/steven/kaya-gnome/-/raw/main/data/screenshots/screenshot-1.png?ref_type=heads&amp;inline=false</image>
+    </screenshot>
+  </screenshots>
+
+  <categories>
+    <category>Utility</category>
+    <category>GNOME</category>
+  </categories>
+
+  <keywords>
+    <keyword>bookmark</keyword>
+    <keyword>bookmarks</keyword>
+    <keyword>organizer</keyword>
+  </keywords>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">none</content_attribute>
+  </content_rating>
+
+  <releases>
+    <release version="0.1.14" date="2026-02-04">
+      <description>
+        <p>Preview release</p>
+        <ul>
+          <li>Local-first bookmarks and notes</li>
+          <li>Tag your bookmark</li>
+          <li>Drop any file to bookmark it</li>
+        </ul>
+      </description>
+      <size type="download">858445</size>
+      <size type="installed">4194304</size>
+    </release>
+  </releases>
+
+  <url type="homepage">https://gitlab.gnome.org/steven/kaya-gnome</url>
+  <url type="bugtracker">https://gitlab.gnome.org/steven/kaya-gnome/-/issues</url>
+  <url type="vcs-browser">https://gitlab.gnome.org/steven/kaya-gnome</url>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#f1e1bf</color>
+    <color type="primary" scheme_preference="dark">#bf9a57</color>
+  </branding>
+
+  <update_contact>sdeobald@gnome.org</update_contact>
+</component>

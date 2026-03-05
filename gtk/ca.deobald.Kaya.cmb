@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<!-- Created with Cambalache 0.96.3 -->
+<cambalache-project version="0.96.0" target_tk="gtk-4.0">
+  <ui template-class="Gjs_Window" filename="data/window.ui" sha256="67f144ba9397e2fbe6ca6193756f25956df47ee548ccd289db8aa46fe010baa0"/>
+</cambalache-project>
