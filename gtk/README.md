@@ -155,43 +155,6 @@ To create a `.dmg` installer:
 $ make macos-dmg
 ```
 
-### Windows Build
-
-Building on Windows requires [MSYS2](https://www.msys2.org/). Download and install MSYS2,
-then open the **MSYS2 MinGW64** shell (not the MSYS2 MSYS shell).
-
-Install build dependencies:
-
-```
-$ make win-deps
-```
-
-This installs all required MSYS2/MinGW64 packages: GTK4, libadwaita, GJS, libsoup,
-GObject Introspection, Meson, Node.js, ImageMagick, and others.
-
-Build the self-contained bundle and run it:
-
-```
-$ make win-build
-$ make win-run
-```
-
-To create an `.msi` installer (requires [WiX v4](https://wixtoolset.org/) via .NET):
-
-```
-$ dotnet tool install --global wix
-$ make win-msi
-```
-
-To clean Windows build artifacts:
-
-```
-$ make win-clean
-```
-
-The Windows CI workflow (`.github/workflows/windows.yml`) automates the full build, bundle,
-and MSI packaging process on GitHub Actions using MSYS2.
-
 ### Flathub Release
 
 * `/bin/release.rb`
