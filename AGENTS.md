@@ -154,7 +154,7 @@ When adding a new feature:
 6. Write tests - following existing patterns
 7. Update docs - If adding new patterns/conventions:
   * keep it light
-  * do not add to `doc/arch/adr-*.md` without asking
+  * do not add to `gtk/doc/arch/adr-*.md` without asking
 8. Never perform git commands
 
 ---
