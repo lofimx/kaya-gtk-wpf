@@ -1,0 +1,73 @@
+<Window x:Class="Kaya.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kaya" Height="550" Width="500"
+        MinHeight="450" MinWidth="360"
+        WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="OnClose" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Menu Bar -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Preferences" InputGestureText="Ctrl+," Click="OnPreferences" />
+                <Separator />
+                <MenuItem Header="_About Kaya" Click="OnAbout" />
+                <Separator />
+                <MenuItem Header="_Quit" InputGestureText="Ctrl+Q" Click="OnQuit" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Bookmark/Note Entry -->
+            <TextBlock Grid.Row="0" Text="Bookmark or Note" Margin="0,0,0,5" />
+            <TextBox Grid.Row="1" x:Name="AngaText" Margin="0,0,0,15"
+                     VerticalAlignment="Top" />
+
+            <!-- Optional Note -->
+            <TextBlock Grid.Row="2" Text="Note (optional)" Margin="0,0,0,5" />
+            <TextBox Grid.Row="3" x:Name="NoteText" Margin="0,0,0,15"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     Height="100" VerticalScrollBarVisibility="Auto" />
+
+            <!-- Save Button and Drop Zone -->
+            <StackPanel Grid.Row="4" Orientation="Vertical">
+                <Button x:Name="SaveButton" Content="Save" Click="OnSave"
+                        HorizontalAlignment="Center" Padding="30,8"
+                        Margin="0,0,0,15" />
+
+                <!-- Drop Target -->
+                <Border x:Name="DropTargetBorder" BorderBrush="Gray" BorderThickness="2"
+                        CornerRadius="8" Padding="20" MinHeight="100"
+                        Background="Transparent" AllowDrop="True"
+                        DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDrop">
+                    <TextBlock Text="Drop files here" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Foreground="Gray" FontSize="14" />
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Toast/Status Bar -->
+        <Border Grid.Row="2" x:Name="ToastBorder" Background="#FF4CAF50"
+                Padding="10,6" Visibility="Collapsed">
+            <TextBlock x:Name="ToastText" Foreground="White"
+                       HorizontalAlignment="Center" FontSize="13" />
+        </Border>
+    </Grid>
+</Window>
