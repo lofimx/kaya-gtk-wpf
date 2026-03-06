@@ -13,10 +13,14 @@
     <file>models/filename.js.map</file>
     <file>models/meta.js</file>
     <file>models/meta.js.map</file>
+    <file>models/search_result.js</file>
+    <file>models/search_result.js.map</file>
     <file>models/timestamp.js</file>
     <file>models/timestamp.js.map</file>
     <file>services/file_service.js</file>
     <file>services/file_service.js.map</file>
+    <file>services/search_service.js</file>
+    <file>services/search_service.js.map</file>
     <file>services/settings_service.js</file>
     <file>services/settings_service.js.map</file>
     <file>services/sync_manager.js</file>

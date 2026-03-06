@@ -1,69 +1,7 @@
 @import './tada.css';
 
-cell {
-  border-top: solid 1px lightgray;
-  border-left: solid 1px lightgray;
-  color: #babdb6;
-}
-
-box:last-child > cell {
-  border-bottom: solid 1px lightgray;
-}
-
-cell:last-child {
-  border-right: solid 1px lightgray;
-}
-
-cell, clues-view {
-  background-color: white;
-}
-
-cell.hovered {
-  background-color: #729fcf;
-}
-
-cell.guide-hovered, clues-view.guide-hovered {
-  background-color: lighter(#fce94f);
-}
-
-clues-view {
-  font-size: 15pt;
-}
-
-clues-view.horizontal {
-  margin-right: 2px;
-  border-top: solid 1px lightgray;
-}
-
-box:last-child > clues-view.horizontal {
-  border-bottom: solid 1px lightgray;
-}
-
-clues-view.vertical {
-  margin-bottom: 2px;
-  border-left: solid 1px lightgray;
-}
-
-clues-view.vertical:last-child {
-  border-right: solid 1px lightgray;
-}
-
-.win-background {
-  background-image: radial-gradient(circle at center, #620075, #620075 25%, #62007520);
-}
-
-.win {
-  animation-duration: 2s;
-  font-size: 48pt;
-  font-weight: bold;
-  opacity: 0;
-  text-transform: uppercase;
-  transition: opacity 50ms;
-  /* https://codepen.io/argyleink/pen/QWzGmXK */
-  color: #ebb9f7;
-  text-shadow: 0 0.15em 15px #3c004a, 0 -2px 0 #fff0ff;
-}
-
-.win.tada {
-  opacity: 1;
+.search-result-card {
+  padding: 12px;
+  min-width: 140px;
+  min-height: 100px;
 }
