@@ -45,7 +45,7 @@ It can be multi-line and uses single quotes to prevent escaping.'''
 
 ```bash
 npm install -g typescript
-make setup
+make setup # from the root of the repo
 ```
 
 ### Zed
@@ -119,7 +119,7 @@ command palette to do both steps at once.
 Initialize the submodule with TypeScript definitions ( `gi-typescript-definitions`):
 
 ```
-$ git submodule update --init
+$ make setup # from the root, above ./gtk
 $ pip install meson
 $ yarn install
 ```

@@ -32,7 +32,7 @@ export class PreferencesWindow extends Adw.PreferencesWindow {
     );
   }
 
-  constructor(params?: Partial<Adw.PreferencesWindow.ConstructorProperties>) {
+  constructor(params?: Partial<Adw.PreferencesWindow.ConstructorProps>) {
     super(params);
     this._settingsService = new SettingsService();
     this._syncService = new SyncService(this._settingsService);
