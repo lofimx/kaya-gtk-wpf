@@ -76,4 +76,37 @@ public class MetaTests
             "[anga]\nfilename = \"2005-08-09T123456-bookmark.url\"\n\n[meta]\nnote = '''It's a \"quoted\" string with '' two singles'''\n",
             result.Contents);
     }
+
+    [Fact]
+    public void Should_create_tags_only_file_with_tags_suffix()
+    {
+        var meta = new Meta("2005-08-09T123456-bookmark.url", "", ["podcast", "democracy"], Clock);
+        var result = meta.ToMetaFile();
+
+        Assert.Equal("2005-08-09T123456-tags.toml", result.Filename);
+        Assert.Equal(
+            "[anga]\nfilename = \"2005-08-09T123456-bookmark.url\"\n\n[meta]\ntags = [\"podcast\", \"democracy\"]\n",
+            result.Contents);
+    }
+
+    [Fact]
+    public void Should_create_meta_file_with_both_tags_and_note()
+    {
+        var meta = new Meta("2005-08-09T123456-bookmark.url", "My note", ["podcast", "cooperatives"], Clock);
+        var result = meta.ToMetaFile();
+
+        Assert.Equal("2005-08-09T123456-meta.toml", result.Filename);
+        Assert.Equal(
+            "[anga]\nfilename = \"2005-08-09T123456-bookmark.url\"\n\n[meta]\ntags = [\"podcast\", \"cooperatives\"]\nnote = '''My note'''\n",
+            result.Contents);
+    }
+
+    [Fact]
+    public void Should_use_note_suffix_when_only_note_is_present()
+    {
+        var meta = new Meta("2005-08-09T123456-bookmark.url", "Just a note", [], Clock);
+        var result = meta.ToMetaFile();
+
+        Assert.Equal("2005-08-09T123456-note.toml", result.Filename);
+    }
 }

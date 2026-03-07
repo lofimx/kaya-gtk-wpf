@@ -1,0 +1,103 @@
+<Window x:Class="Kaya.Wpf.NewSaveWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New Save" Height="500" Width="450"
+        MinHeight="400" MinWidth="350"
+        WindowStartupLocation="CenterOwner"
+        AllowDrop="True"
+        DragEnter="OnWindowDragEnter" DragLeave="OnWindowDragLeave" Drop="OnWindowDrop"
+        KeyDown="OnWindowKeyDown">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Open File Button -->
+        <Button Grid.Row="0" x:Name="OpenFileButton" Content="Open a File..."
+                Click="OnOpenFile" HorizontalAlignment="Right" Margin="0,0,0,10"
+                Padding="12,4" />
+
+        <!-- Content Stack: Form vs File Preview -->
+        <Grid Grid.Row="1" x:Name="FormPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Bookmark/Note Entry -->
+            <TextBlock Grid.Row="0" Text="Enter bookmark or note" Margin="0,0,0,5" />
+            <TextBox Grid.Row="1" x:Name="AngaText" Margin="0,0,0,10" />
+
+            <!-- Tags Entry -->
+            <TextBlock Grid.Row="2" Text="Tags" Margin="0,0,0,5" />
+            <Border Grid.Row="3" x:Name="TagsBorder" Margin="0,0,0,10"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                    BorderThickness="1" CornerRadius="4" Padding="4,2"
+                    MinHeight="32" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto" MaxHeight="80">
+                    <WrapPanel x:Name="TagsPanel">
+                        <TextBox x:Name="TagsEntry" BorderThickness="0" MinWidth="80"
+                                 Background="Transparent" VerticalAlignment="Center"
+                                 Margin="2" KeyDown="OnTagsKeyDown"
+                                 PreviewKeyDown="OnTagsPreviewKeyDown" />
+                    </WrapPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Note -->
+            <TextBlock Grid.Row="4" Text="Note (optional)" Margin="0,0,0,5" />
+            <TextBox Grid.Row="5" x:Name="NoteText" AcceptsReturn="True"
+                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                     MinHeight="80" />
+        </Grid>
+
+        <!-- File Preview (hidden by default) -->
+        <Grid Grid.Row="1" x:Name="FilePreviewPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,10">
+                <StackPanel x:Name="FilePreviewContent" VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <TextBlock x:Name="FilePreviewIcon" Text="&#128196;" FontSize="64"
+                               HorizontalAlignment="Center" Margin="0,0,0,10" />
+                    <TextBlock x:Name="FilePreviewName" Text="" FontSize="16"
+                               FontWeight="SemiBold" HorizontalAlignment="Center"
+                               TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+            </Border>
+
+            <Button Grid.Row="1" x:Name="RemoveFileButton" Content="Remove"
+                    Click="OnRemoveFile" HorizontalAlignment="Center"
+                    Padding="20,6" Foreground="White"
+                    Background="#FFD32F2F" />
+        </Grid>
+
+        <!-- Toast -->
+        <Border Grid.Row="2" x:Name="ToastBorder" Padding="8,4"
+                Visibility="Collapsed" CornerRadius="4" Margin="0,10,0,0">
+            <TextBlock x:Name="ToastText" Foreground="White"
+                       HorizontalAlignment="Center" FontSize="12" />
+        </Border>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Cancel" Click="OnCancel" Padding="20,6" Margin="0,0,10,0" />
+            <Button x:Name="SaveButton" Content="Save" Click="OnSave"
+                    Padding="20,6" IsDefault="True"
+                    Foreground="White" Background="#FF0078D4" />
+        </StackPanel>
+    </Grid>
+</Window>

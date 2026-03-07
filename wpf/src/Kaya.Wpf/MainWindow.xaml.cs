@@ -1,4 +1,3 @@
-using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -8,11 +7,23 @@ using Kaya.Core.Services;
 
 namespace Kaya.Wpf;
 
+public class SearchResultViewModel
+{
+    public string Filename { get; init; } = "";
+    public string DisplayTitle { get; init; } = "";
+    public string ContentPreview { get; init; } = "";
+    public string Date { get; init; } = "";
+    public string TypeIcon { get; init; } = "";
+}
+
 public partial class MainWindow : Window
 {
+    private readonly SearchService _searchService = new();
     private readonly FileService _fileService = new();
-    private readonly IClock _clock = new SystemClock();
+    private DispatcherTimer? _searchDebounceTimer;
     private DispatcherTimer? _toastTimer;
+
+    private const int SearchDebounceMs = 300;
 
     public MainWindow()
     {
@@ -20,92 +31,113 @@ public partial class MainWindow : Window
         this.ApplyDarkTitleBar();
         _fileService.EnsureKayaDirectories();
 
-        // Keyboard shortcuts
         InputBindings.Add(new KeyBinding(ApplicationCommands.Close, Key.Q, ModifierKeys.Control));
         InputBindings.Add(new KeyBinding(new RelayCommand(_ => OnPreferences(this, new RoutedEventArgs())),
             Key.OemComma, ModifierKeys.Control));
         InputBindings.Add(new KeyBinding(new RelayCommand(_ => Close()),
             Key.W, ModifierKeys.Control));
+        InputBindings.Add(new KeyBinding(new RelayCommand(_ => OnNewSave(this, new RoutedEventArgs())),
+            Key.N, ModifierKeys.Control));
+        InputBindings.Add(new KeyBinding(new RelayCommand(_ => SearchEntry.Focus()),
+            Key.F, ModifierKeys.Control));
+
+        Loaded += (_, _) =>
+        {
+            PerformSearch();
+            SearchEntry.Focus();
+        };
+
+        Console.WriteLine("🔵 INFO EverythingWindow initialized");
     }
 
-    private void OnSave(object sender, RoutedEventArgs e)
+    private void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
-        var text = AngaText.Text.Trim();
-        if (string.IsNullOrEmpty(text))
+        // Auto-focus search entry when typing printable characters without modifiers
+        if (SearchEntry.IsFocused) return;
+        if (Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) return;
+
+        // Check if it's a printable character
+        if (e.Key >= Key.A && e.Key <= Key.Z ||
+            e.Key >= Key.D0 && e.Key <= Key.D9 ||
+            e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
         {
-            ShowToast("Nothing to save", isError: true);
+            SearchEntry.Focus();
+            // Don't mark as handled — let the character pass through to the TextBox
+        }
+    }
+
+    private void OnSearchTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    {
+        _searchDebounceTimer?.Stop();
+        _searchDebounceTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(SearchDebounceMs)
+        };
+        _searchDebounceTimer.Tick += (_, _) =>
+        {
+            _searchDebounceTimer.Stop();
+            PerformSearch();
+        };
+        _searchDebounceTimer.Start();
+    }
+
+    private void PerformSearch()
+    {
+        var query = SearchEntry.Text.Trim();
+        var results = _searchService.Search(query);
+
+        if (results.Count == 0 && string.IsNullOrEmpty(query))
+        {
+            EmptyState.Visibility = Visibility.Visible;
+            NoResultsState.Visibility = Visibility.Collapsed;
+            ResultsList.Visibility = Visibility.Collapsed;
             return;
         }
 
-        try
+        if (results.Count == 0)
         {
-            var anga = new Anga(text, _clock);
-            var angaFile = anga.ToAngaFile();
-            _fileService.Save(angaFile);
-
-            var noteText = NoteText.Text.Trim();
-            if (!string.IsNullOrEmpty(noteText))
-            {
-                var meta = new Meta(angaFile.Filename, noteText, _clock);
-                _fileService.SaveMeta(meta.ToMetaFile());
-            }
-
-            AngaText.Text = "";
-            NoteText.Text = "";
-            ShowToast("Saved!");
+            EmptyState.Visibility = Visibility.Collapsed;
+            NoResultsState.Visibility = Visibility.Visible;
+            ResultsList.Visibility = Visibility.Collapsed;
+            return;
         }
-        catch (Exception ex)
+
+        EmptyState.Visibility = Visibility.Collapsed;
+        NoResultsState.Visibility = Visibility.Collapsed;
+        ResultsList.Visibility = Visibility.Visible;
+        ResultsList.ItemsSource = results.Select(r => new SearchResultViewModel
         {
-            ShowToast($"Error: {ex.Message}", isError: true);
-        }
+            Filename = r.Filename,
+            DisplayTitle = r.DisplayTitle,
+            ContentPreview = r.ContentPreview,
+            Date = r.Date,
+            TypeIcon = TypeIconFor(r.Type)
+        }).ToList();
     }
 
-    private void OnDragEnter(object sender, DragEventArgs e)
+    private static string TypeIconFor(AngaType type) => type switch
     {
-        if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        {
-            DropTargetBorder.BorderBrush = new SolidColorBrush(Colors.DodgerBlue);
-            e.Effects = DragDropEffects.Copy;
-        }
-        else
-        {
-            e.Effects = DragDropEffects.None;
-        }
-        e.Handled = true;
+        AngaType.Bookmark => "\U0001F517",  // link
+        AngaType.Note => "\U0001F4CC",       // pushpin
+        AngaType.File => "\U0001F4C4",       // page facing up
+        _ => "\U0001F4C4"
+    };
+
+    private void RefreshSearch()
+    {
+        _searchService.InvalidateCache();
+        PerformSearch();
+        Console.WriteLine("🔵 INFO Search refreshed");
     }
 
-    private void OnDragLeave(object sender, DragEventArgs e)
+    private void OnNewSave(object sender, RoutedEventArgs e)
     {
-        DropTargetBorder.BorderBrush = new SolidColorBrush(Colors.Gray);
-    }
-
-    private void OnDrop(object sender, DragEventArgs e)
-    {
-        DropTargetBorder.BorderBrush = new SolidColorBrush(Colors.Gray);
-
-        if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
-
-        var files = (string[])e.Data.GetData(DataFormats.FileDrop)!;
-        var savedCount = 0;
-
-        foreach (var filePath in files)
+        var newSaveWindow = new NewSaveWindow
         {
-            try
-            {
-                var fileName = Path.GetFileName(filePath);
-                var contents = File.ReadAllBytes(filePath);
-                var dropped = new DroppedFile(fileName, contents, _clock);
-                _fileService.SaveDroppedFile(dropped.ToDroppedFile());
-                savedCount++;
-            }
-            catch (Exception ex)
-            {
-                ShowToast($"Failed to save {Path.GetFileName(filePath)}: {ex.Message}", isError: true);
-            }
-        }
-
-        if (savedCount > 0)
-            ShowToast($"Saved {savedCount} file(s)!");
+            Owner = this,
+            OnSaveComplete = RefreshSearch
+        };
+        newSaveWindow.ShowDialog();
     }
 
     private void OnPreferences(object sender, RoutedEventArgs e)
