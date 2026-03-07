@@ -152,14 +152,14 @@ export class PreferencesWindow extends Adw.PreferencesWindow {
     const lastSuccess = this._settingsService.lastSyncSuccess;
 
     let status: string;
-    if (lastError) {
-      status = `Error: ${lastError}`;
-    } else if (isDefaultServer) {
+    if (isDefaultServer) {
       status = "Sync disabled (default server not yet available)";
     } else if (!serverUrl) {
       status = "Not configured - enter a server URL";
     } else if (!hasCredentials) {
       status = "Not configured - enter email and password";
+    } else if (lastError) {
+      status = `Error: ${lastError}`;
     } else if (lastSuccess) {
       const successDate = new Date(lastSuccess);
       status = `Last sync: ${successDate.toLocaleString()}`;

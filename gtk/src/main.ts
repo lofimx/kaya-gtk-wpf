@@ -3,12 +3,13 @@ import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk?version=4.0";
 
-import { Window } from "./views/window.js";
+import { EverythingWindow } from "./views/everything_window.js";
+import { NewSaveWindow } from "./views/new_save_window.js";
 import { PreferencesWindow } from "./views/preferences.js";
 import { SyncManager } from "./services/sync_manager.js";
 
 export class Application extends Adw.Application {
-  #window?: Window;
+  #window?: EverythingWindow;
   #syncManager?: SyncManager;
 
   static {
@@ -60,6 +61,35 @@ export class Application extends Adw.Application {
     this.add_action(show_preferences_action);
     this.set_accels_for_action("app.preferences", ["<Control>comma"]);
 
+    const new_save_action = new Gio.SimpleAction({ name: "new-save" });
+    new_save_action.connect("activate", () => {
+      const newSaveWindow = new NewSaveWindow(
+        {
+          transient_for: this.active_window ?? undefined,
+          modal: !!this.active_window,
+        },
+        () => {
+          this.#window?.refreshSearch();
+        }
+      );
+      newSaveWindow.present();
+    });
+
+    this.add_action(new_save_action);
+    this.set_accels_for_action("app.new-save", ["<Control>n"]);
+
+    const focus_search_action = new Gio.SimpleAction({ name: "focus-search" });
+    focus_search_action.connect("activate", () => {
+      // The EverythingWindow handles this via its key controller,
+      // but Ctrl+F provides an explicit shortcut
+      if (this.#window) {
+        this.#window.focusSearch();
+      }
+    });
+
+    this.add_action(focus_search_action);
+    this.set_accels_for_action("app.focus-search", ["<Control>f"]);
+
     Gio._promisify(Gio.File.prototype, "read_async", "read_finish");
     Gio._promisify(Gtk.UriLauncher.prototype, "launch", "launch_finish");
   }
@@ -74,7 +104,7 @@ export class Application extends Adw.Application {
   }
 
   #createWindow() {
-    this.#window = new Window({ application: this });
+    this.#window = new EverythingWindow({ application: this });
     this.#window.present();
   }
 

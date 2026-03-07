@@ -13,6 +13,8 @@ Before creating the plan, read these documents:
 * [gtk/doc/design/DESIGN.md](../design/DESIGN.md)
 * [gtk/doc/arch/*.md](../arch/)
 
-Then create the plan **in `wpf/doc/plan/`** and ask any clarifying questions you have. After I answer your questions to eliminate ambiguity, adjust the plan accordingly. Ask more clarifying questions, if required, and repeat the process until all your questions are answered.
+Also read the "Dev Process" section of [gtk/README.md](../../README.md) for the list of locations where new files must be registered.
 
-**Important:** The plan file must be written to `wpf/doc/plan/` at the start of work, not to any tool-internal or temporary location. If your tooling uses a separate plan file path, copy or write the plan to `wpf/doc/plan/` as the first step. The plan document in this directory is the canonical record of what was done and why.
+Then create the plan **in `gtk/doc/plan/`** and ask any clarifying questions you have. After I answer your questions to eliminate ambiguity, adjust the plan accordingly. Ask more clarifying questions, if required, and repeat the process until all your questions are answered.
+
+**Important:** The plan file must be written to `gtk/doc/plan/` at the start of work, not to any tool-internal or temporary location. If your tooling uses a separate plan file path, copy or write the plan to `gtk/doc/plan/` as the first step. The plan document in this directory is the canonical record of what was done and why.

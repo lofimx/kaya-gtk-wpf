@@ -13,8 +13,9 @@ sources = files(
   'services/settings_service.ts',
   'services/sync_manager.ts',
   'services/sync_service.ts',
+  'views/everything_window.ts',
+  'views/new_save_window.ts',
   'views/preferences.ts',
-  'views/window.ts',
   'main.ts',
 )
 

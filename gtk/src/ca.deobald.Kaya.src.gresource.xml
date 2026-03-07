@@ -27,10 +27,12 @@
     <file>services/sync_manager.js.map</file>
     <file>services/sync_service.js</file>
     <file>services/sync_service.js.map</file>
+    <file>views/everything_window.js</file>
+    <file>views/everything_window.js.map</file>
+    <file>views/new_save_window.js</file>
+    <file>views/new_save_window.js.map</file>
     <file>views/preferences.js</file>
     <file>views/preferences.js.map</file>
-    <file>views/window.js</file>
-    <file>views/window.js.map</file>
     <file>vendor/temporal.js</file>
   </gresource>
 </gresources>

@@ -21,3 +21,25 @@ Move the Search bar down from the title bar to the top of the main Everything wi
 ### Tags
 
 In the "New Save" window, a field for saving tags, in addition to notes, which will be saved according to [@adr-0003-metadata.md](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/arch/adr-0003-metadata.md). Tags should appear as primary color "pills" when comma (",") is typed or the tags field is exited, indicating that a complete tag has been typed. The literal comma should not be typed into the Tags box when a pill/tag is created. Typing <backspace> to the right of a "pill" tag will delete the entire tag.
+
+### BUG: Typing into "bookmark" field overwrites itself
+
+When typing into the "enter bookmark" field, the text is constantly overwritten, so only one character is visible at a time.
+
+### BUG: tag "pills" should appear within the tags textbox
+
+Tag "pills" should appear within the textbox itself (not above it), as though they are editable items. Pressing backspace to the right of a pill should remove the entire pill. If required, create a custom GTK control for this. The pills should appear in the [round style](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html#round).
+
+Pills are showing up when <tab> is pressed, not <comma> (","), which is incorrect. Commas **should not** be visible in the tags field at all, since typing a comma should "finalize" a pill. Typing <tab> should move to the next field if there is no text to turn into a pill. The pills also aren't visible against the background of the textbox. Pills should use the accent color returned by https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/property.StyleManager.accent-color.html
+
+### BUG: <esc> kills the entire process
+
+Pressing <esc> should only close the "New Save" window, returning the user to the Everything window. Instead, the process dies. From `make run`, it returns: `make: *** [Makefile:32: run] Error 139`
+
+### BUG: Sync Status should be empty if sync is not configured
+
+Although email/password is not set, the previous 401 error is still showing in the Sync Status.
+
+### Notes no longer needs to be hidden
+
+Since creating a new anga/save is now in its own window, Notes does not need to be hidden by default anymore and the widget wrapping it to permit hiding can be removed.
