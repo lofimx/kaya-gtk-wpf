@@ -18,9 +18,3 @@ builddir-macos/
 *.iconset/
 *.icns
 
-# windows iso junk
-win10iso/Win10.iso
-win10iso/downloads
-win10iso/drivers
-win10iso/win_temp
-
