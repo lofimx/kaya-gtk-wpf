@@ -53,3 +53,22 @@ Throughout the app, rename 'ca.deobald.Kaya' to 'org.savebutton' as the applicat
 With this change, replace the "box" icon used throughout the app with the Save Button icon, found at [@yellow-floppy3.svg](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/design/yellow-floppy3.svg).
 
 After this refactoring, 'ca.deobald' should appear nowhere in the codebase. Internally, 'Kaya' and 'kaya' can appear as the repo name, top level namespace, and so on. All user-facing text should refer to the app as "Save Button", including build artifacts ('SaveButton.app', 'SaveButton.dmg', etc.)
+
+## Add Preview
+
+Read [@plan](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/plan) and [@design](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/design) and follow the GNOME HIG for this work.
+
+Add [@preview_window.ts](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/src/views/preview_window.ts) as a modal, which opens when a tile in the Everything window is clicked. This should mirror the behaviour of the Preview found in [@kaya-server](file:///home/steven/work/lofimx/kaya-server), including a sidebar with tags, notes, and share options. The "download" option is not required since the file is already on the user's computer. Don't bother including the greyed out "Add to space" option.
+
+* The Preview modal should have Cancel and Save buttons which close the window (also bound to <esc>) and create a new `meta` file, respectively.
+* Opening the Preview modal loads the most recent `meta` file for the `anga` it represents.
+* Create a reusable "tags" widget to display tags as pills inline, similar to the "New Save" window.
+* TODO: The "share" option should be greyed out for now, since it requires a POST "share" API on the server, which doesn't exist yet.
+
+Each `anga` file type should display the regular sidebar in addition to:
+
+* bookmarks: show the cached favicon instead of displaying a cached webpage, and include an option to "visit original webpage"
+* notes: show the note text inline, as rendered Markdown
+* images: show the entire image inline
+* PDFs: render the PDF inline
+
