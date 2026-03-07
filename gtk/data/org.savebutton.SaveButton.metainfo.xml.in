@@ -42,8 +42,12 @@
 
   <screenshots>
     <screenshot type="default">
+      <caption>Main window for searching bookmarks</caption>
+      <image>https://github.com/lofimx/kaya-gtk-wpf/blob/main/gtk/data/screenshots/screenshot-1.png</image>
+    </screenshot>
+    <screenshot>
       <caption>Main window for entering bookmarks</caption>
-      <image>https://gitlab.gnome.org/steven/kaya-gnome/-/raw/main/data/screenshots/screenshot-1.png?ref_type=heads&amp;inline=false</image>
+      <image>https://github.com/lofimx/kaya-gtk-wpf/blob/main/gtk/data/screenshots/screenshot-2.png</image>
     </screenshot>
   </screenshots>
 

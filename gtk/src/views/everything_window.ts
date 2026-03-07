@@ -9,8 +9,8 @@ import { SearchResult } from "../models/search_result.js";
 const SEARCH_DEBOUNCE_MS = 300;
 
 const TYPE_ICONS: Record<string, string> = {
-  bookmark: "globe-symbolic",
-  note: "document-text-symbolic",
+  bookmark: "bookmark-filled-symbolic",
+  note: "pin-symbolic",
   file: "text-x-generic-symbolic",
 };
 

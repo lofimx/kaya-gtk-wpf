@@ -8,4 +8,8 @@
     <file preprocess="xml-stripblanks">everything_window.ui</file>
     <file preprocess="xml-stripblanks">new_save_window.ui</file>
   </gresource>
+  <gresource prefix="/org/savebutton/SaveButton/icons/scalable/actions">
+    <file preprocess="xml-stripblanks" alias="pin-symbolic.svg">icons/pin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="bookmark-filled-symbolic.svg">icons/bookmark-filled-symbolic.svg</file>
+  </gresource>
 </gresources>

@@ -1,4 +1,5 @@
 import Adw from "gi://Adw";
+import Gdk from "gi://Gdk?version=4.0";
 import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk?version=4.0";
@@ -92,6 +93,16 @@ export class Application extends Adw.Application {
 
     Gio._promisify(Gio.File.prototype, "read_async", "read_finish");
     Gio._promisify(Gtk.UriLauncher.prototype, "launch", "launch_finish");
+  }
+
+  vfunc_startup(): void {
+    super.vfunc_startup();
+
+    const display = Gdk.Display.get_default();
+    if (display) {
+      const iconTheme = Gtk.IconTheme.get_for_display(display);
+      iconTheme.add_resource_path("/org/savebutton/SaveButton/icons");
+    }
   }
 
   vfunc_activate(): void {
