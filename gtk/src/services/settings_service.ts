@@ -88,83 +88,6 @@ function _macosClearPassword(): boolean {
   }
 }
 
-// --- Windows Credential Manager helpers (use PowerShell + PasswordVault) ---
-
-const WINCRED_RESOURCE = "org.savebutton.SaveButton";
-const WINCRED_USERNAME = "kaya-server-password";
-
-// Common prefix to load the WinRT PasswordVault type in PowerShell
-const PS_VAULT_INIT =
-  "[Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]|Out-Null;" +
-  "$v=New-Object Windows.Security.Credentials.PasswordVault;";
-
-function _windowsGetPassword(): string | null {
-  try {
-    const cmd =
-      PS_VAULT_INIT +
-      `$c=$v.Retrieve('${WINCRED_RESOURCE}','${WINCRED_USERNAME}');` +
-      "$c.RetrievePassword();" +
-      "Write-Output $c.Password";
-    const [ok, stdout] = GLib.spawn_sync(
-      null,
-      ["powershell.exe", "-NoProfile", "-Command", cmd],
-      null,
-      GLib.SpawnFlags.SEARCH_PATH,
-      null
-    );
-    if (ok && stdout) {
-      const decoded = new TextDecoder("utf-8").decode(stdout).trim();
-      return decoded || null;
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-function _windowsSetPassword(password: string): boolean {
-  try {
-    // Remove existing credential first (PasswordVault throws if duplicate)
-    const cmd =
-      PS_VAULT_INIT +
-      `try{$old=$v.Retrieve('${WINCRED_RESOURCE}','${WINCRED_USERNAME}');$v.Remove($old)}catch{};` +
-      `$c=New-Object Windows.Security.Credentials.PasswordCredential('${WINCRED_RESOURCE}','${WINCRED_USERNAME}','${password.replace(
-        /'/g,
-        "''"
-      )}');` +
-      "$v.Add($c)";
-    const [ok] = GLib.spawn_sync(
-      null,
-      ["powershell.exe", "-NoProfile", "-Command", cmd],
-      null,
-      GLib.SpawnFlags.SEARCH_PATH,
-      null
-    );
-    return ok;
-  } catch {
-    return false;
-  }
-}
-
-function _windowsClearPassword(): boolean {
-  try {
-    const cmd =
-      PS_VAULT_INIT +
-      `$c=$v.Retrieve('${WINCRED_RESOURCE}','${WINCRED_USERNAME}');` +
-      "$v.Remove($c)";
-    const [ok] = GLib.spawn_sync(
-      null,
-      ["powershell.exe", "-NoProfile", "-Command", cmd],
-      null,
-      GLib.SpawnFlags.SEARCH_PATH,
-      null
-    );
-    return ok;
-  } catch {
-    return false;
-  }
-}
-
 // --- Linux libsecret (conditional import) ---
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -178,10 +101,13 @@ if (!IS_MACOS && !IS_WINDOWS) {
     Gio._promisify(Secret, "password_store", "password_store_finish");
     Gio._promisify(Secret, "password_lookup", "password_lookup_finish");
     Gio._promisify(Secret, "password_clear", "password_clear_finish");
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     passwordSchema = new Secret.Schema(
       SECRET_SCHEMA_NAME,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       Secret.SchemaFlags.NONE,
       {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         application: Secret.SchemaAttributeType.STRING,
       }
     );
@@ -258,17 +184,15 @@ export class SettingsService {
     if (IS_MACOS) {
       return _macosGetPassword();
     }
-    if (IS_WINDOWS) {
-      return _windowsGetPassword();
-    }
     if (!Secret || !passwordSchema) return null;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const password = await Secret.password_lookup(
         passwordSchema,
         { application: SECRET_SCHEMA_NAME },
         null
       );
-      return password;
+      return password as string | null;
     } catch (e) {
       console.error(
         `Failed to retrieve password from keyring: ${e as string}`,
@@ -282,20 +206,19 @@ export class SettingsService {
     if (IS_MACOS) {
       return _macosSetPassword(password);
     }
-    if (IS_WINDOWS) {
-      return _windowsSetPassword(password);
-    }
     if (!Secret || !passwordSchema) return false;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const success = await Secret.password_store(
         passwordSchema,
         { application: SECRET_SCHEMA_NAME },
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         Secret.COLLECTION_DEFAULT,
         "Save Button Server Password",
         password,
         null
       );
-      return success;
+      return success as boolean;
     } catch (e) {
       console.error(`Failed to store password in keyring: ${e as string}`, [e]);
       return false;
@@ -306,17 +229,15 @@ export class SettingsService {
     if (IS_MACOS) {
       return _macosClearPassword();
     }
-    if (IS_WINDOWS) {
-      return _windowsClearPassword();
-    }
     if (!Secret || !passwordSchema) return false;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const success = await Secret.password_clear(
         passwordSchema,
         { application: SECRET_SCHEMA_NAME },
         null
       );
-      return success;
+      return success as boolean;
     } catch (e) {
       console.error(`Failed to clear password from keyring: ${e as string}`, [
         e,
