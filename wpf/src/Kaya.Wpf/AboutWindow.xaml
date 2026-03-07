@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="About Save Button" Height="250" Width="350"
         WindowStartupLocation="CenterOwner"
+        Icon="app.ico"
         ResizeMode="NoResize">
     <Grid Margin="30">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

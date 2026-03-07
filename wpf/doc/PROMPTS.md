@@ -15,3 +15,5 @@ The background of the tiles (for anga/saves) on the Everything screen is not fol
 ### BUG: Icon is not displaying
 
 The "Save Button" icon ([@yellow-floppy3.svg](file:///C:/Users/steven/work/kaya-gtk-wpf/wpf/doc/design/yellow-floppy3.svg)) should be used for the application's window, task bar, title bar, etc.
+
+Write a utility .NET console app but keep it in `wpf/bin/`, rather than throwing it away, since we'll need to convert other SVGs to ICO/PNG/etc. in the future on Windows. Then use the console app to convert the SVG to ICO

@@ -4,6 +4,7 @@
         Title="Save Button" Height="550" Width="500"
         MinHeight="450" MinWidth="360"
         WindowStartupLocation="CenterScreen"
+        Icon="app.ico"
         PreviewKeyDown="OnPreviewKeyDown">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close" Executed="OnClose" />

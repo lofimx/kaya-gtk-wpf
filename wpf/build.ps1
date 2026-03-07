@@ -8,7 +8,7 @@ try {
     switch ($Command) {
         "build"   { dotnet build }
         "test"    { dotnet test }
-        "run"     { dotnet run --project src/Kaya.Wpf }
+        "run"     { $ErrorActionPreference = "Continue"; dotnet run --project src/Kaya.Wpf 2>&1 }
         "clean"   { dotnet clean }
         "publish" { dotnet publish src/Kaya.Wpf -c Release }
         default   { Write-Error "Unknown command: $Command. Use build, test, run, clean, or publish." }

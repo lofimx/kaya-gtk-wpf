@@ -4,12 +4,18 @@
     <ProjectReference Include="..\Kaya.Core\Kaya.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="app.ico" />
+    <Resource Include="app.ico" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
