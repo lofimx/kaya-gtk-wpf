@@ -38,9 +38,8 @@
             <!-- Tags Entry -->
             <TextBlock Grid.Row="2" Text="Tags" Margin="0,0,0,5" />
             <Border Grid.Row="3" x:Name="TagsBorder" Margin="0,0,0,10"
-                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
                     BorderThickness="1" CornerRadius="4" Padding="4,2"
-                    MinHeight="32" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                    MinHeight="32">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto" MaxHeight="80">
                     <WrapPanel x:Name="TagsPanel">
@@ -66,8 +65,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-                    CornerRadius="8" Padding="20" Margin="0,0,0,10">
+            <Border Grid.Row="0" CornerRadius="8" Padding="20" Margin="0,0,0,10">
                 <StackPanel x:Name="FilePreviewContent" VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                     <TextBlock x:Name="FilePreviewIcon" Text="&#128196;" FontSize="64"

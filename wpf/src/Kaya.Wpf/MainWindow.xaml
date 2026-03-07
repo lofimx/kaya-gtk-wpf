@@ -63,8 +63,7 @@
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Padding="10,8" Margin="0,2" CornerRadius="6"
-                                    Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                            <Border Padding="10,8" Margin="0,2" CornerRadius="6">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
