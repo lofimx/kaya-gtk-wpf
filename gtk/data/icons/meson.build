@@ -1,4 +1,4 @@
-application_id = 'ca.deobald.Kaya'
+application_id = 'org.savebutton.SaveButton'
 
 # Install scalable SVG icon
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')

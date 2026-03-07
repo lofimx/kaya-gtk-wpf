@@ -19,7 +19,7 @@ export class PreferencesWindow extends Adw.PreferencesWindow {
   static {
     GObject.registerClass(
       {
-        Template: "resource:///ca/deobald/Kaya/preferences.ui",
+        Template: "resource:///org/savebutton/SaveButton/preferences.ui",
         InternalChildren: [
           "serverUrlEntry",
           "emailEntry",
@@ -145,7 +145,7 @@ export class PreferencesWindow extends Adw.PreferencesWindow {
     const email = this._emailEntry.text;
     const hasPassword = this._passwordEntry.text.length > 0;
 
-    const isDefaultServer = serverUrl === "https://kaya.town";
+    const isDefaultServer = serverUrl === "https://savebutton.com";
     const hasCredentials = email.length > 0 && hasPassword;
 
     const lastError = this._settingsService.lastSyncError;

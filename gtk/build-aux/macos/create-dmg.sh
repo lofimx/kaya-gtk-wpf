@@ -23,7 +23,7 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 APP_PATH="$1"
-APP_NAME="Kaya"
+APP_NAME="SaveButton"
 
 VERSION=$(defaults read "$APP_PATH/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null || echo "dev")
 OUTPUT_DMG="${2:-${APP_NAME}-${VERSION}.dmg}"
@@ -85,7 +85,7 @@ rm -f "$OUTPUT_DMG"
 
 create-dmg \
     --volname "$APP_NAME" \
-    --volicon "$APP_PATH/Contents/Resources/kaya.icns" \
+    --volicon "$APP_PATH/Contents/Resources/savebutton.icns" \
     --window-pos 200 120 \
     --window-size 600 400 \
     --icon-size 100 \

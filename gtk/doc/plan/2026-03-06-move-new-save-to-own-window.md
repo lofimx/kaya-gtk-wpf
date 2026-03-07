@@ -30,7 +30,7 @@ The "New Save" functionality (bookmark entry, notes, save button) is visually bu
 **Modify:** `gtk/src/views/everything_window.ts`
 
 - Rename class `Window` → `EverythingWindow`
-- Update Template path to `resource:///ca/deobald/Kaya/everything_window.ui`
+- Update Template path to `resource:///org/savebutton/everything_window.ui`
 - Remove save-related fields/InternalChildren: `_angaText`, `_noteText`, `_saveButton`, `_noteRevealer`, `_noteToggle`
 - Remove methods: `_setupNoteToggle()`, `onSave()`, `_setupDropTarget()`, `_handleDroppedFile()`, `showSuccess()`, `showFailure()`
 - Remove imports: `Anga`, `Dropped`, `FileService`, `Meta`, `SystemClock`, `Gdk`
@@ -47,7 +47,7 @@ The "New Save" functionality (bookmark entry, notes, save button) is visually bu
 - Replace header bar title-widget with `AdwWindowTitle` (title: "Kaya")
 - Wrap `GtkStack` (results) in `GtkOverlay`; add circular `suggested-action` FAB button ("+" / `list-add-symbolic`) at bottom-end with margins, connected to `app.new-save` action
 
-**Modify:** `gtk/data/ca.deobald.Kaya.data.gresource.xml`
+**Modify:** `gtk/data/org.savebutton.data.gresource.xml`
 
 - Replace `window.ui` → `everything_window.ui`
 - Add `new_save_window.ui`
@@ -123,7 +123,7 @@ The "New Save" functionality (bookmark entry, notes, save button) is visually bu
 
 **New:** `gtk/data/new_save_window.ui`, `gtk/src/views/new_save_window.ts`
 **Rename:** `gtk/src/views/window.ts` → `everything_window.ts`, `gtk/data/window.ui` → `everything_window.ui`
-**Modify:** `gtk/src/models/meta.ts`, `gtk/tests/meta.test.ts`, `gtk/src/main.ts`, `gtk/src/meson.build`, `gtk/data/ca.deobald.Kaya.data.gresource.xml`, `gtk/data/style.css`, `gtk/data/gtk/help-overlay.ui`
+**Modify:** `gtk/src/models/meta.ts`, `gtk/tests/meta.test.ts`, `gtk/src/main.ts`, `gtk/src/meson.build`, `gtk/data/org.savebutton.data.gresource.xml`, `gtk/data/style.css`, `gtk/data/gtk/help-overlay.ui`
 
 ## Verification
 

@@ -38,7 +38,7 @@ export class NewSaveWindow extends Adw.Window {
   static {
     GObject.registerClass(
       {
-        Template: "resource:///ca/deobald/Kaya/new_save_window.ui",
+        Template: "resource:///org/savebutton/SaveButton/new_save_window.ui",
         InternalChildren: [
           "angaText",
           "tagsContainer",

@@ -8,11 +8,11 @@ variables:
 
 flatpak:
   variables:
-    MANIFEST_PATH: "build-aux/flatpak/ca.deobald.Kaya.json"
-    BUNDLE: "ca.deobald.Kaya.flatpak"
+    MANIFEST_PATH: "build-aux/flatpak/org.savebutton.SaveButton.json"
+    BUNDLE: "org.savebutton.SaveButton.flatpak"
     FLATPAK_MODULE: "kaya"
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
-    APP_ID: "ca.deobald.Kaya"
+    APP_ID: "org.savebutton.SaveButton"
   extends: .flatpak
   before_script:
     - flatpak --user install -y org.freedesktop.Sdk.Extension.node24//25.08 org.freedesktop.Sdk.Extension.typescript//25.08

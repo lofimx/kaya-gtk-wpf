@@ -6,7 +6,7 @@
 #   Step 1: Determine and confirm new version
 #   Step 2: Update version in all source files
 #   Step 3: Commit, push, tag, push tags
-#   Step 4: Update ca.deobald.Kaya.json branch, commit, push
+#   Step 4: Update org.savebutton.SaveButton.json branch, commit, push
 
 require "json"
 require "date"
@@ -86,12 +86,12 @@ meson.sub!(/version:\s*'[^']*'/, "version: '#{new_version}'")
 File.write(meson_path, meson)
 puts "  Updated meson.build"
 
-# data/ca.deobald.Kaya.metainfo.xml.in
-metainfo_path = File.join(ROOT, "data", "ca.deobald.Kaya.metainfo.xml.in")
+# data/org.savebutton.SaveButton.metainfo.xml.in
+metainfo_path = File.join(ROOT, "data", "org.savebutton.SaveButton.metainfo.xml.in")
 metainfo = File.read(metainfo_path)
 metainfo.sub!(/<release version="[^"]*" date="[^"]*"/, "<release version=\"#{new_version}\" date=\"#{today}\"")
 File.write(metainfo_path, metainfo)
-puts "  Updated data/ca.deobald.Kaya.metainfo.xml.in"
+puts "  Updated data/org.savebutton.SaveButton.metainfo.xml.in"
 
 # src/main.ts
 main_ts_path = File.join(ROOT, "src", "main.ts")
@@ -127,13 +127,13 @@ confirm("Push tags?")
 run("git push --tags")
 puts "  Pushed tags"
 
-# --- Step 4: Update ca.deobald.Kaya.json branch and commit ---
+# --- Step 4: Update org.savebutton.SaveButton.json branch and commit ---
 
 puts
-puts "=== Step 4: Update ca.deobald.Kaya.json ==="
+puts "=== Step 4: Update org.savebutton.SaveButton.json ==="
 puts
 
-manifest_path = File.join(ROOT, "ca.deobald.Kaya.json")
+manifest_path = File.join(ROOT, "org.savebutton.SaveButton.json")
 manifest = JSON.parse(File.read(manifest_path))
 
 git_source = manifest["modules"][0]["sources"].find { |s| s["type"] == "git" }
@@ -142,11 +142,11 @@ if git_source
   git_source["branch"] = new_tag
   git_source["commit"] = commit_hash
   File.write(manifest_path, JSON.pretty_generate(manifest) + "\n")
-  puts "  Updated ca.deobald.Kaya.json:"
+  puts "  Updated org.savebutton.SaveButton.json:"
   puts "    branch: #{new_tag}"
   puts "    commit: #{commit_hash}"
 else
-  abort "Could not find git source in ca.deobald.Kaya.json"
+  abort "Could not find git source in org.savebutton.SaveButton.json"
 end
 
 puts

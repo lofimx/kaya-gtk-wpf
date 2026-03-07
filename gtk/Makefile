@@ -20,32 +20,32 @@ test:
 
 build: generated-sources.json
 	npm run bundle:temporal
-	flatpak-builder --user --force-clean flatpak_app build-aux/flatpak/ca.deobald.Kaya.json
+	flatpak-builder --user --force-clean flatpak_app build-aux/flatpak/org.savebutton.SaveButton.json
 
 install:
-	flatpak-builder --user --install --force-clean _build_install build-aux/flatpak/ca.deobald.Kaya.json
+	flatpak-builder --user --install --force-clean _build_install build-aux/flatpak/org.savebutton.SaveButton.json
 
 # NOTE: Do not use `flatpak-builder --run` here. It creates an incomplete
 # sandbox that lacks proper document portal FUSE integration, which breaks
 # drag-and-drop file access from file managers on Wayland.
 run: install
-	flatpak run ca.deobald.Kaya
+	flatpak run org.savebutton.SaveButton
 
 uninstall:
-	flatpak uninstall ca.deobald.Kaya
+	flatpak uninstall org.savebutton.SaveButton
 
 flatpak-build:
-	flatpak-builder --user --force-clean --repo=repo flatpak_prod ca.deobald.Kaya.json
-	flatpak build-bundle repo ca.deobald.Kaya.flatpak ca.deobald.Kaya
+	flatpak-builder --user --force-clean --repo=repo flatpak_prod org.savebutton.SaveButton.json
+	flatpak build-bundle repo org.savebutton.SaveButton.flatpak org.savebutton.SaveButton
 
 flatpak-install:
-	flatpak run --command=flathub-build org.flatpak.Builder --install ca.deobald.Kaya.json
+	flatpak run --command=flathub-build org.flatpak.Builder --install org.savebutton.SaveButton.json
 
 flatpak-lint:
-	flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest ca.deobald.Kaya.json
+	flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest org.savebutton.SaveButton.json
 
 flatpak-run:
-	flatpak run ca.deobald.Kaya
+	flatpak run org.savebutton.SaveButton
 
 # --- macOS targets ---
 
@@ -59,14 +59,14 @@ macos-build:
 	bash build-aux/macos/bundle.sh
 
 macos-dmg: macos-build
-	bash build-aux/macos/create-dmg.sh Kaya.app Kaya.dmg
+	bash build-aux/macos/create-dmg.sh SaveButton.app SaveButton.dmg
 
 macos-run: macos-build
-	open Kaya.app
+	open SaveButton.app
 
 macos-clean:
 	rm -rf builddir-macos
-	rm -rf Kaya.app
+	rm -rf SaveButton.app
 	rm -f *.dmg
 
 

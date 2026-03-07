@@ -3,7 +3,7 @@
   "version": "0.1.14",
   "description": "Simple bookmark and notes manager",
   "main": "src/main.ts",
-  "repository": "https://gitlab.gnome.org/steven/kaya-gnome",
+  "repository": "https://github.com/lofimx/kaya-gtk-wpf",
   "author": "Steven Deobald <sdeobald@gnome.org>",
   "license": "MIT",
   "dependencies": {

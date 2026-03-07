@@ -26,7 +26,7 @@ export class EverythingWindow extends Adw.ApplicationWindow {
   static {
     GObject.registerClass(
       {
-        Template: "resource:///ca/deobald/Kaya/everything_window.ui",
+        Template: "resource:///org/savebutton/SaveButton/everything_window.ui",
         InternalChildren: [
           "toastOverlay",
           "searchEntry",
@@ -47,7 +47,7 @@ export class EverythingWindow extends Adw.ApplicationWindow {
 
   constructor(params?: Partial<Adw.ApplicationWindow.ConstructorProps>) {
     super(params);
-    this.icon_name = "ca.deobald.Kaya";
+    this.icon_name = "org.savebutton.SaveButton";
     this._searchService = new SearchService();
     this._setupSearch();
     this._setupKeyboardFocus();

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2026 Steven Deobald -->
 <component type="desktop-application">
-  <id>ca.deobald.Kaya</id>
-  <name>Kaya</name>
+  <id>org.savebutton.SaveButton</id>
+  <name>Save Button</name>
   <summary>Simple bookmark manager for GNOME</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0</project_license>
 
-  <developer id="ca.deobald">
+  <developer id="org.savebutton.SaveButton">
     <name>Steven Deobald</name>
   </developer>
 
@@ -25,11 +25,11 @@
     <display_length compare="ge">768</display_length>
   </recommends>
 
-  <launchable type="desktop-id">ca.deobald.Kaya.desktop</launchable>
+  <launchable type="desktop-id">org.savebutton.SaveButton.desktop</launchable>
 
   <description>
     <p>
-      Kaya is a lightweight bookmark manager designed for GNOME. It provides a simple
+      Save Button is a lightweight bookmark manager designed for GNOME. It provides a simple
       and efficient way to save and organize your bookmarks.
     </p>
     <p>Features:</p>
@@ -77,14 +77,14 @@
     </release>
   </releases>
 
-  <url type="homepage">https://gitlab.gnome.org/steven/kaya-gnome</url>
-  <url type="bugtracker">https://gitlab.gnome.org/steven/kaya-gnome/-/issues</url>
-  <url type="vcs-browser">https://gitlab.gnome.org/steven/kaya-gnome</url>
+  <url type="homepage">https://github.com/lofimx/kaya-gtk-wpf</url>
+  <url type="bugtracker">https://github.com/lofimx/kaya-gtk-wpf/issues</url>
+  <url type="vcs-browser">https://github.com/lofimx/kaya-gtk-wpf</url>
 
   <branding>
     <color type="primary" scheme_preference="light">#f1e1bf</color>
     <color type="primary" scheme_preference="dark">#bf9a57</color>
   </branding>
 
-  <update_contact>sdeobald@gnome.org</update_contact>
+  <update_contact>steven@lofi.mx</update_contact>
 </component>

@@ -26,20 +26,20 @@ jobs:
 
       - name: Verify bundle
         run: |
-          test -x Kaya.app/Contents/MacOS/kaya
-          test -f Kaya.app/Contents/Resources/bin/gjs
-          test -f Kaya.app/Contents/Resources/share/kaya/ca.deobald.Kaya.src.gresource
-          test -f Kaya.app/Contents/Resources/share/kaya/ca.deobald.Kaya.data.gresource
-          test -f Kaya.app/Contents/Resources/share/kaya/kaya-launcher.js
-          test -f Kaya.app/Contents/Resources/kaya.icns
-          file Kaya.app/Contents/Resources/bin/gjs | grep -q "arm64"
+          test -x SaveButton.app/Contents/MacOS/kaya
+          test -f SaveButton.app/Contents/Resources/bin/gjs
+          test -f SaveButton.app/Contents/Resources/share/kaya/org.savebutton.SaveButton.src.gresource
+          test -f SaveButton.app/Contents/Resources/share/kaya/org.savebutton.SaveButton.data.gresource
+          test -f SaveButton.app/Contents/Resources/share/kaya/kaya-launcher.js
+          test -f SaveButton.app/Contents/Resources/savebutton.icns
+          file SaveButton.app/Contents/Resources/bin/gjs | grep -q "arm64"
           echo "arm64 bundle verified."
 
       - name: Upload arm64 bundle
         uses: actions/upload-artifact@v4
         with:
-          name: Kaya-arm64
-          path: Kaya.app
+          name: SaveButton-arm64
+          path: SaveButton.app
           retention-days: 1
 
   build-x86_64:
@@ -59,16 +59,16 @@ jobs:
 
       - name: Verify bundle
         run: |
-          test -x Kaya.app/Contents/MacOS/kaya
-          test -f Kaya.app/Contents/Resources/bin/gjs
-          file Kaya.app/Contents/Resources/bin/gjs | grep -q "x86_64"
+          test -x SaveButton.app/Contents/MacOS/kaya
+          test -f SaveButton.app/Contents/Resources/bin/gjs
+          file SaveButton.app/Contents/Resources/bin/gjs | grep -q "x86_64"
           echo "x86_64 bundle verified."
 
       - name: Upload x86_64 bundle
         uses: actions/upload-artifact@v4
         with:
-          name: Kaya-x86_64
-          path: Kaya.app
+          name: SaveButton-x86_64
+          path: SaveButton.app
           retention-days: 1
 
   universal-dmg:
@@ -81,22 +81,22 @@ jobs:
       - name: Download arm64 bundle
         uses: actions/download-artifact@v4
         with:
-          name: Kaya-arm64
-          path: Kaya-arm64.app
+          name: SaveButton-arm64
+          path: SaveButton-arm64.app
 
       - name: Download x86_64 bundle
         uses: actions/download-artifact@v4
         with:
-          name: Kaya-x86_64
-          path: Kaya-x86_64.app
+          name: SaveButton-x86_64
+          path: SaveButton-x86_64.app
 
       - name: Create Universal Binary
-        run: bash build-aux/macos/make-universal.sh Kaya-arm64.app Kaya-x86_64.app Kaya.app
+        run: bash build-aux/macos/make-universal.sh SaveButton-arm64.app SaveButton-x86_64.app SaveButton.app
 
       - name: Verify Universal Binary
         run: |
-          file Kaya.app/Contents/Resources/bin/gjs
-          file Kaya.app/Contents/Resources/bin/gjs | grep -q "universal"
+          file SaveButton.app/Contents/Resources/bin/gjs
+          file SaveButton.app/Contents/Resources/bin/gjs | grep -q "universal"
           echo "Universal binary verified."
 
       - name: Install create-dmg
@@ -108,12 +108,12 @@ jobs:
           MACOS_NOTARIZE_APPLE_ID: ${{ secrets.MACOS_NOTARIZE_APPLE_ID }}
           MACOS_NOTARIZE_PASSWORD: ${{ secrets.MACOS_NOTARIZE_PASSWORD }}
           MACOS_NOTARIZE_TEAM_ID: ${{ secrets.MACOS_NOTARIZE_TEAM_ID }}
-        run: bash build-aux/macos/create-dmg.sh Kaya.app
+        run: bash build-aux/macos/create-dmg.sh SaveButton.app
 
       - name: Upload DMG
         uses: actions/upload-artifact@v4
         with:
-          name: Kaya-macOS-Universal
+          name: SaveButton-macOS-Universal
           path: "*.dmg"
 
       - name: Attach to GitHub Release

@@ -13,8 +13,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-APP_NAME="Kaya"
-APP_ID="ca.deobald.Kaya"
+APP_NAME="SaveButton"
+APP_ID="org.savebutton.SaveButton"
 VERSION=$(grep "version:" "$PROJECT_ROOT/meson.build" | head -1 | sed "s/.*'\(.*\)'.*/\1/")
 
 # Detect Homebrew prefix (arm64 vs x86_64)
@@ -33,7 +33,7 @@ CONTENTS="$APPDIR/Contents"
 MACOS_DIR="$CONTENTS/MacOS"
 RESOURCES="$CONTENTS/Resources"
 
-echo "=== Building Kaya $VERSION for macOS ==="
+echo "=== Building Save Button $VERSION for macOS ==="
 echo "Homebrew prefix: $BREW_PREFIX"
 echo "Architecture: $(uname -m)"
 
@@ -78,7 +78,7 @@ sed "s/@VERSION@/$VERSION/g" "$SCRIPT_DIR/Info.plist.in" > "$CONTENTS/Info.plist
 # ---- Step 4: Generate .icns icon ----
 echo "--- Step 4: Generating .icns ---"
 
-ICONSET_DIR="$SCRIPT_DIR/kaya.iconset"
+ICONSET_DIR="$SCRIPT_DIR/savebutton.iconset"
 rm -rf "$ICONSET_DIR"
 mkdir -p "$ICONSET_DIR"
 
@@ -99,7 +99,7 @@ rsvg-convert -w 512 -h 512 "$SVG_SRC" -o "$ICONSET_DIR/icon_256x256@2x.png"
 rsvg-convert -w 512 -h 512 "$SVG_SRC" -o "$ICONSET_DIR/icon_512x512.png"
 rsvg-convert -w 1024 -h 1024 "$SVG_SRC" -o "$ICONSET_DIR/icon_512x512@2x.png"
 
-iconutil -c icns "$ICONSET_DIR" -o "$RESOURCES/kaya.icns"
+iconutil -c icns "$ICONSET_DIR" -o "$RESOURCES/savebutton.icns"
 rm -rf "$ICONSET_DIR"
 
 # ---- Step 5: Copy GResource bundles ----

@@ -12,7 +12,7 @@
               <object class="AdwHeaderBar">
                 <property name="title-widget">
                   <object class="AdwWindowTitle">
-                    <property name="title" translatable="yes">Kaya</property>
+                    <property name="title" translatable="yes">Save Button</property>
                   </object>
                 </property>
                 <child type="end">

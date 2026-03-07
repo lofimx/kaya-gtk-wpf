@@ -12,7 +12,7 @@ module.exports = {
   plugins: ["prettier"],
   overrides: [
     {
-      files: ["src/ca.deobald.Kaya.in"],
+      files: ["src/org.savebutton.SaveButton.in"],
       globals: {
         imports: true,
         pkg: true,

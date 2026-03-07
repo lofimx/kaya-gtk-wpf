@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-  input: 'ca.deobald.Kaya.desktop.in',
-  output: 'ca.deobald.Kaya.desktop',
+  input: 'org.savebutton.SaveButton.desktop.in',
+  output: 'org.savebutton.SaveButton.desktop',
   type: 'desktop',
   po_dir: '../po',
   install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-  input: 'ca.deobald.Kaya.metainfo.xml.in',
-  output: 'ca.deobald.Kaya.metainfo.xml',
+  input: 'org.savebutton.SaveButton.metainfo.xml.in',
+  output: 'org.savebutton.SaveButton.metainfo.xml',
   po_dir: '../po',
   install: true,
   install_dir: join_paths(get_option('datadir'), 'metainfo'),
@@ -29,7 +29,7 @@ if appstream_util.found()
   )
 endif
 
-gsettings_schema = 'ca.deobald.Kaya.gschema.xml'
+gsettings_schema = 'org.savebutton.SaveButton.gschema.xml'
 
 local_schemas = configure_file(copy: true, input: gsettings_schema, output: gsettings_schema)
 
@@ -56,8 +56,8 @@ if compile_schemas.found()
 endif
 
 data_res = gnome.compile_resources(
-  'ca.deobald.Kaya.data',
-  'ca.deobald.Kaya.data.gresource.xml',
+  'org.savebutton.SaveButton.data',
+  'org.savebutton.SaveButton.data.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,

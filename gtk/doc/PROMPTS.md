@@ -43,3 +43,13 @@ Although email/password is not set, the previous 401 error is still showing in t
 ### Notes no longer needs to be hidden
 
 Since creating a new anga/save is now in its own window, Notes does not need to be hidden by default anymore and the widget wrapping it to permit hiding can be removed.
+
+## Rename 'ca.deobald.Kaya' to 'org.savebutton'
+
+Read [@PLAN.md](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/plan/PLAN.md). If you don't have any questions, go ahead and perform the refactoring without asking.
+
+Throughout the app, rename 'ca.deobald.Kaya' to 'org.savebutton' as the application id and any related files/directories/fields which contain that text, or derivative text like '/ca/deobald/Kaya'. The name of this repository and its open source software remains "Kaya" but the name the user should see, including title bar, About dialog, and so on should be "Save Button".
+
+With this change, replace the "box" icon used throughout the app with the Save Button icon, found at [@yellow-floppy3.svg](file:///home/steven/work/lofimx/kaya-gtk-wpf/gtk/doc/design/yellow-floppy3.svg).
+
+After this refactoring, 'ca.deobald' should appear nowhere in the codebase. Internally, 'Kaya' and 'kaya' can appear as the repo name, top level namespace, and so on. All user-facing text should refer to the app as "Save Button", including build artifacts ('SaveButton.app', 'SaveButton.dmg', etc.)

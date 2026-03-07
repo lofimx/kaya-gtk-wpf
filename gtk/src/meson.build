@@ -64,8 +64,8 @@ typescript = custom_target(
 )
 
 src_res = gnome.compile_resources(
-  'ca.deobald.Kaya.src',
-  'ca.deobald.Kaya.src.gresource.xml',
+  'org.savebutton.SaveButton.src',
+  'org.savebutton.SaveButton.src.gresource.xml',
   dependencies: typescript,
   source_dir: tsc_out,
   gresource_bundle: true,
@@ -80,11 +80,11 @@ bin_conf.set('PACKAGE_NAME', meson.project_name())
 bin_conf.set('prefix', get_option('prefix'))
 bin_conf.set('libdir', join_paths(get_option('prefix'), get_option('libdir')))
 bin_conf.set('datadir', join_paths(get_option('prefix'), get_option('datadir')))
-bin_conf.set('resource_path', '/ca/deobald/Kaya')
+bin_conf.set('resource_path', '/org/savebutton/SaveButton')
 
 app_launcher = configure_file(
-  input: 'ca.deobald.Kaya.in',
-  output: 'ca.deobald.Kaya',
+  input: 'org.savebutton.SaveButton.in',
+  output: 'org.savebutton.SaveButton',
   configuration: bin_conf,
   install: true,
   install_dir: get_option('bindir'),

@@ -6,13 +6,13 @@ All validation checks passed:
 
 ```bash
 # Validate metainfo
-appstreamcli validate data/ca.deobald.Kaya.metainfo.xml.in
+appstreamcli validate data/org.savebutton.SaveButton.metainfo.xml.in
 
 # Validate desktop file
-desktop-file-validate data/ca.deobald.Kaya.desktop.in
+desktop-file-validate data/org.savebutton.SaveButton.desktop.in
 
 # Test Flathub build
-flatpak run --command=flathub-build org.flatpak.Builder --install ca.deobald.Kaya.json
+flatpak run --command=flathub-build org.flatpak.Builder --install org.savebutton.SaveButton.json
 
 # Regular build
 make build
@@ -35,9 +35,9 @@ The production manifest includes:
 1. Go to https://github.com/flathub/flathub/new/new-pr
 2. Click "New App Submission" or create a new issue requesting app submission
 3. Follow the Flathub bot instructions to create your app repository
-4. Once `ca.deobald.Kaya` repository is created under flathub:
-   - Clone it: `git clone https://github.com/flathub/ca.deobald.Kaya.git`
-   - Copy your `ca.deobald.Kaya.json` into it
+4. Once `org.savebutton.SaveButton` repository is created under flathub:
+   - Clone it: `git clone https://github.com/flathub/org.savebutton.SaveButton.git`
+   - Copy your `org.savebutton.SaveButton.json` into it
    - Add flathub.json if required (bot will tell you)
    - Commit and push
    - Create PR for review

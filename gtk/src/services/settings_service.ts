@@ -1,8 +1,8 @@
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 
-const DEFAULT_SERVER_URL = "https://kaya.town";
-const SECRET_SCHEMA_NAME = "ca.deobald.Kaya";
+const DEFAULT_SERVER_URL = "https://savebutton.com";
+const SECRET_SCHEMA_NAME = "org.savebutton.SaveButton";
 
 // Platform detection: KAYA_PLATFORM is set by platform-specific shell launchers
 const KAYA_PLATFORM = GLib.getenv("KAYA_PLATFORM");
@@ -11,8 +11,8 @@ const IS_WINDOWS = KAYA_PLATFORM === "windows";
 
 // --- macOS Keychain helpers (use `security` CLI) ---
 
-const KEYCHAIN_SERVICE = "ca.deobald.Kaya";
-const KEYCHAIN_ACCOUNT = "kaya-server-password";
+const KEYCHAIN_SERVICE = "org.savebutton.SaveButton";
+const KEYCHAIN_ACCOUNT = "savebutton-server-password";
 
 function _macosGetPassword(): string | null {
   try {
@@ -90,7 +90,7 @@ function _macosClearPassword(): boolean {
 
 // --- Windows Credential Manager helpers (use PowerShell + PasswordVault) ---
 
-const WINCRED_RESOURCE = "ca.deobald.Kaya";
+const WINCRED_RESOURCE = "org.savebutton.SaveButton";
 const WINCRED_USERNAME = "kaya-server-password";
 
 // Common prefix to load the WinRT PasswordVault type in PowerShell
@@ -128,7 +128,10 @@ function _windowsSetPassword(password: string): boolean {
     const cmd =
       PS_VAULT_INIT +
       `try{$old=$v.Retrieve('${WINCRED_RESOURCE}','${WINCRED_USERNAME}');$v.Remove($old)}catch{};` +
-      `$c=New-Object Windows.Security.Credentials.PasswordCredential('${WINCRED_RESOURCE}','${WINCRED_USERNAME}','${password.replace(/'/g, "''")}');` +
+      `$c=New-Object Windows.Security.Credentials.PasswordCredential('${WINCRED_RESOURCE}','${WINCRED_USERNAME}','${password.replace(
+        /'/g,
+        "''"
+      )}');` +
       "$v.Add($c)";
     const [ok] = GLib.spawn_sync(
       null,
@@ -191,7 +194,9 @@ export class SettingsService {
   private _settings: Gio.Settings;
 
   constructor() {
-    this._settings = new Gio.Settings({ schema_id: "ca.deobald.Kaya" });
+    this._settings = new Gio.Settings({
+      schema_id: "org.savebutton.SaveButton",
+    });
   }
 
   get serverUrl(): string {
@@ -286,7 +291,7 @@ export class SettingsService {
         passwordSchema,
         { application: SECRET_SCHEMA_NAME },
         Secret.COLLECTION_DEFAULT,
-        "Kaya Server Password",
+        "Save Button Server Password",
         password,
         null
       );

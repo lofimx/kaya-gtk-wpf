@@ -1,19 +1,17 @@
 {
-  "id": "ca.deobald.Kaya",
+  "id": "org.savebutton.SaveButton",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "master",
+  "runtime-version": "48",
   "sdk": "org.gnome.Sdk",
   "sdk-extensions": [
     "org.freedesktop.Sdk.Extension.node24",
     "org.freedesktop.Sdk.Extension.rust-stable",
     "org.freedesktop.Sdk.Extension.typescript"
   ],
-  "tags": ["nightly"],
   "build-options": {
-    "append-path": "/usr/lib/sdk/node24/bin:/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/typescript/bin",
-    "build-args": ["--share=network"]
+    "append-path": "/usr/lib/sdk/node24/bin:/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/typescript/bin"
   },
-  "command": "ca.deobald.Kaya",
+  "command": "org.savebutton.SaveButton",
   "finish-args": [
     "--share=ipc",
     "--share=network",
@@ -45,11 +43,20 @@
     {
       "name": "kaya",
       "buildsystem": "meson",
+      "build-options": {
+        "env": {
+          "npm_config_offline": "true",
+          "npm_config_cache": "/run/build/kaya/flatpak-node/npm-cache"
+        }
+      },
       "sources": [
         {
-          "type": "dir",
-          "path": "../.."
-        }
+          "type": "git",
+          "url": "https://gitlab.gnome.org/steven/kaya-gnome.git",
+          "branch": "v0.1.14",
+          "commit": "0b84cac4d705d22ba10932cc2103a36f7798e52c"
+        },
+        "generated-sources.json"
       ]
     }
   ]

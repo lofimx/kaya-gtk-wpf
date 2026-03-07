@@ -165,7 +165,7 @@ You'll need to remember to add new files to these locations:
 
 * `/src/{filename}.ts`
 * `/src/meson.build`
-* `/src/ca.deobald.Kaya.src.gresource.xml`
+* `/src/org.savebutton.SaveButton.src.gresource.xml`
 
 ## References
 

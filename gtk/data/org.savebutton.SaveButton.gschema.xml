@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schemalist gettext-domain="kaya">
-  <schema id="ca.deobald.Kaya" path="/ca/deobald/Kaya/">
+  <schema id="org.savebutton.SaveButton" path="/org/savebutton/SaveButton/">
     <key name="sync-server-url" type="s">
       <default>'https://kaya.town'</default>
       <summary>Kaya Server URL</summary>

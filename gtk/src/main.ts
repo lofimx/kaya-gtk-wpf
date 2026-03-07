@@ -18,7 +18,7 @@ export class Application extends Adw.Application {
 
   constructor() {
     super({
-      application_id: "ca.deobald.Kaya",
+      application_id: "org.savebutton.SaveButton",
       flags: Gio.ApplicationFlags.DEFAULT_FLAGS,
     });
 
@@ -34,8 +34,8 @@ export class Application extends Adw.Application {
     const show_about_action = new Gio.SimpleAction({ name: "about" });
     show_about_action.connect("activate", () => {
       const aboutDialog = new Adw.AboutDialog({
-        application_name: _("Kaya"),
-        application_icon: "ca.deobald.Kaya",
+        application_name: _("Save Button"),
+        application_icon: "org.savebutton.SaveButton",
         developer_name: "Steven Deobald",
         version: "0.1.14",
         developers: ["Steven Deobald <sdeobald@gnome.org>"],

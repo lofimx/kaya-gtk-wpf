@@ -5,17 +5,17 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>Kaya</string>
+    <string>Save Button</string>
     <key>CFBundleExecutable</key>
     <string>kaya</string>
     <key>CFBundleIconFile</key>
-    <string>kaya.icns</string>
+    <string>savebutton.icns</string>
     <key>CFBundleIdentifier</key>
-    <string>ca.deobald.Kaya</string>
+    <string>org.savebutton.SaveButton</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Kaya</string>
+    <string>Save Button</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

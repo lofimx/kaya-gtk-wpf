@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
-  <gresource prefix="/ca/deobald/Kaya">
+  <gresource prefix="/org/savebutton/SaveButton">
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">preferences.ui</file>
     <file>style.css</file>

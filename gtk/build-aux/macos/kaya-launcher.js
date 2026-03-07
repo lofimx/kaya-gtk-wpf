@@ -1,6 +1,6 @@
 // Kaya macOS GJS entry point
 //
-// This script replaces the Meson-configured launcher (ca.deobald.Kaya.in)
+// This script replaces the Meson-configured launcher (org.savebutton.SaveButton.in)
 // for the macOS .app bundle. It cannot use imports.package.init() because
 // that requires a baked-in prefix path, but the .app bundle must be
 // relocatable. Instead, it manually loads GResource bundles and CSS
@@ -15,7 +15,7 @@ import Gtk from "gi://Gtk?version=4.0";
 // The shell launcher sets KAYA_RESOURCES_DIR to Contents/Resources
 const resourcesDir = GLib.getenv("KAYA_RESOURCES_DIR");
 if (!resourcesDir) {
-  console.error("KAYA_RESOURCES_DIR is not set. Launch via Kaya.app.");
+  console.error("KAYA_RESOURCES_DIR is not set. Launch via SaveButton.app.");
   exit(1);
 }
 
@@ -24,13 +24,13 @@ const srcGresourcePath = GLib.build_filenamev([
   resourcesDir,
   "share",
   "kaya",
-  "ca.deobald.Kaya.src.gresource",
+  "org.savebutton.SaveButton.src.gresource",
 ]);
 const dataGresourcePath = GLib.build_filenamev([
   resourcesDir,
   "share",
   "kaya",
-  "ca.deobald.Kaya.data.gresource",
+  "org.savebutton.SaveButton.data.gresource",
 ]);
 
 const srcResource = Gio.Resource.load(srcGresourcePath);
@@ -44,7 +44,7 @@ Gio.resources_register(dataResource);
 const display = Gdk.Display.get_default();
 if (display) {
   const cssProvider = new Gtk.CssProvider();
-  cssProvider.load_from_resource("/ca/deobald/Kaya/style.css");
+  cssProvider.load_from_resource("/org/savebutton/SaveButton/style.css");
   Gtk.StyleContext.add_provider_for_display(
     display,
     cssProvider,
@@ -53,6 +53,6 @@ if (display) {
 }
 
 // Import and run the application from the GResource
-const module = await import("resource:///ca/deobald/Kaya/js/main.js");
+const module = await import("resource:///org/savebutton/SaveButton/js/main.js");
 const exitCode = await module.main(programArgs);
 exit(exitCode);
